@@ -42,7 +42,8 @@ def isImg(value, list_in=list_img_suffix):
 
 
 if __name__ == '__main__':
-
+    # There are 2 values for copyAnyway 1. True 2. False
+    copyAnyway = False
     folder_ExpectedResult = r'D:\Pro_2.0_screenshots_To_BYS-sorting'
     folder_ActualResult = r'D:\Pro_2.0_screenshots_To_BYS-sorting - Copy'
 
@@ -62,7 +63,7 @@ if __name__ == '__main__':
         if isImg(l) and l not in list_ActualResult:
             missing_errors += 1
             print "%0004d > [%s]" % (missing_errors, folder_ActualResult + l)
-    if extra_errors == 0 and missing_errors == 0:
+    if (extra_errors == 0 and missing_errors == 0) or copyAnyway:
         commentFormat("Coping files, please wait...")
         fn = r"D:/" + getTimeSuffix()
         createFolder(fn)
