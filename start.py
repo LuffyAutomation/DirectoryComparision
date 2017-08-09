@@ -17,7 +17,7 @@ def createFolder(p_folder):
     if not os.path.isdir(p_folder):
         os.makedirs(p_folder)
         time.sleep(0.1)
-def getNowTime():
+def getTimeSuffix():
     return datetime.datetime.now().strftime('%Y%m%d_%H%M%S%f')
 def copyFile(o_file, dst):
     if os.path.isfile(o_file):
@@ -50,7 +50,7 @@ if __name__ == '__main__':
             print "%0004d > [%s]" % (missing_errors, folder_ActualResult + l)
     if extra_errors == 0 and missing_errors == 0:
         commentFormat("Coping files, please wait...")
-        fn = r"D:/" + getNowTime()
+        fn = r"D:/" + getTimeSuffix()
         createFolder(fn)
         list_newExpected = os.walk(folder_ExpectedResult).next()[1]
         for i in list_newExpected:
@@ -66,11 +66,6 @@ if __name__ == '__main__':
     else:
         commentFormat("Please correct the error(s) at first.")
 
-    # case_dict = {}
-    #
-    # for c in _WorkSheet.iter_rows():
-    #     if c[0].value is not None and c[0].value.lower() == "DP0106002".lower():
-    #         print c[2].value
 
 
 
