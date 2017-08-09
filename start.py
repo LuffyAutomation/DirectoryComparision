@@ -28,6 +28,19 @@ def commentFormat(comment):
     print "*****  " + comment
     print sepratorEnd
 
+list_img_suffix = [".jpg", ".jpeg", ".png", ".bmp", ".gif"]
+def isInCollection(value, list_in=list_img_suffix):
+    if "." + value.lower().split(".")[-1] in list_in:
+        return True
+    return False
+
+def isImg(value, list_in=list_img_suffix):
+    last = value.split("\\")[-1]
+    if "." in last and "." + value.lower().split(".")[-1] not in list_in:
+        return False
+    return True
+
+
 if __name__ == '__main__':
 
     folder_ExpectedResult = r'D:\Pro_2.0_screenshots_To_BYS-sorting'
@@ -41,12 +54,12 @@ if __name__ == '__main__':
     list_ActualResult = getList(folder_ActualResult)
     commentFormat("Extra folder(s)/file(s):")
     for l in list_ActualResult:
-        if l not in list_ExpectedResult:
+        if isImg(l) and l not in list_ExpectedResult:
             extra_errors += 1
             print "%0004d > [%s]" % (extra_errors, folder_ActualResult + l)
     commentFormat("Missing folder(s)/file(s):")
     for l in list_ExpectedResult:
-        if l not in list_ActualResult:
+        if isImg(l) and l not in list_ActualResult:
             missing_errors += 1
             print "%0004d > [%s]" % (missing_errors, folder_ActualResult + l)
     if extra_errors == 0 and missing_errors == 0:
@@ -60,7 +73,7 @@ if __name__ == '__main__':
         for l in list_ExpectedResult:
             start = l.split("\\")[1]
             last = l.split("\\")[-1]
-            if "." + last.lower().split(".")[-1] in [".jpg", ".jpeg", ".png", ".bmp", ".gif"] and start in list_newExpected:
+            if isInCollection(last) and start in list_newExpected:
                 copyFile(folder_ExpectedResult + l, os.path.join(fn, start, last))
                 copyFile(folder_ActualResult + l, os.path.join(fn, start + "_actual", last))
         commentFormat("Done! Please find the result in [%s]." % fn)
