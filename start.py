@@ -24,16 +24,17 @@ def copyFile(o_file, dst):
         shutil.copyfile(o_file, dst)
 def commentFormat(comment):
     print ""
-    print seprator
+    print sepratorStart
     print "*****  " + comment
-    print seprator
+    print sepratorEnd
 
 if __name__ == '__main__':
 
     folder_ExpectedResult = r'D:\Pro_2.0_screenshots_To_BYS-sorting'
     folder_ActualResult = r'D:\Pro_2.0_screenshots_To_BYS-sorting - Copy'
 
-    seprator = "******************************************"
+    sepratorStart = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    sepratorEnd = "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     extra_errors = 0
     missing_errors = 0
     list_ExpectedResult = getList(folder_ExpectedResult)
